@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleRequest;
+use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Article\UseCase\StoreArticleUseCase;
+
 
 class ArticleController extends Controller
 {
@@ -27,6 +31,7 @@ class ArticleController extends Controller
     public function create()
     {
         //
+        return view('articles.create');
     }
 
     /**
@@ -35,9 +40,11 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request, StoreArticleUsecase $useCase)
     {
         //
+        $useCase->handle($request->title, $request->body);
+        return redirect()->route('articles.index');
     }
 
     /**
