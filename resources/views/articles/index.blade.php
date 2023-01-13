@@ -12,14 +12,16 @@
                     <div class="text-gray-900 font-bold text-xl mb-2">
                         {{ $article->title ?? '' }}
                     </div>
-                    <p class="text-gray-700 text-base">{{ $article->body ?? '' }}</p>
+                    <p class="text-gray-700 text-base">{!! nl2br($article->body) ?? '' !!}</p>
                     <div class="px-6 pt-4 pb-2">
-                        <span class="inline-block bg-gray-600 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                        <span class="inline-block bg-gray-600 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                        <span class="inline-block bg-gray-600 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
                     </div>
                 </div>                
             </div>
         @endforeach
+        {{-- ページネーション作成 --}}
+        {{ $articles->links('vendor.pagination.tailwind2') }}
     </div>
 </x-app-layout>

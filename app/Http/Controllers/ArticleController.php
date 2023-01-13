@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Article\UseCase\ShowArticleListUseCase;
+use App\Article\UseCase\StoreArticleUseCase;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
-use App\Article\UseCase\StoreArticleUseCase;
 
 
 class ArticleController extends Controller
@@ -15,12 +16,11 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ShowArticleListUseCase $useCase)
     {
-        // ダミーデータ
-        $articles = [];
-
-        return view('articles.index', ['articles' => $articles]);
+        //
+        // TODO: tag機能追加
+        return view('articles.index', [] + $useCase->handle());
     }
 
     /**

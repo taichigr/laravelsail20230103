@@ -3,7 +3,6 @@
 namespace App\Article\UseCase;
 
 use App\Models\Article;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
