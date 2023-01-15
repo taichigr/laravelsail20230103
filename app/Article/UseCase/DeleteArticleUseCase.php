@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
-final class EditArticleUsecase
+final class DeleteArticleUseCase
 {
 
     /**
-     * 記事更新
+     * 記事投稿削除処理
      *
      * @param Article $article
      * @param string $title
@@ -23,5 +23,6 @@ final class EditArticleUsecase
         if($article->user_id !== Auth::id()) {
             abort(403);
         }
+        $article->delete();
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Article\UseCase\CheckPostedUserUseCase;
+use App\Article\UseCase\DeleteArticleUseCase;
 use App\Article\UseCase\EditArticleUsecase;
 use App\Article\UseCase\ShowArticleListUseCase;
+use App\Article\UseCase\ShowArticleUseCase;
 use App\Article\UseCase\StoreArticleUseCase;
 use App\Article\UseCase\UpdateArticleUsecase;
 use App\Http\Requests\ArticleRequest;
@@ -52,24 +55,25 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article, ShowArticleUseCase $useCase)
     {
         //
+        return view('articles.show', [] + $useCase->handle($article));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article, EditArticleUsecase $useCase)
+    public function edit(Article $article, CheckPostedUserUseCase $checkPostedUserUseCase)
     {
         //
-        $useCase->handle($article);
+        $checkPostedUserUseCase->handle($article);
         return view('articles.edit', ['article' => $article]);
     }
 
@@ -77,25 +81,28 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param   App\Http\Requests\ArticleRequest $request
-     * @param  int  $id
+     * @param  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function update(ArticleRequest $request, Article $article, UpdateArticleUsecase $useCase)
+    public function update(ArticleRequest $request, Article $article, UpdateArticleUsecase $useCase, CheckPostedUserUseCase $checkPostedUserUseCase)
     {
         //
-
+        $checkPostedUserUseCase->handle($article);
         $useCase->handle($article, $request->title, $request->body);
-        dd($article);
+        return redirect()->route('articles.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article, DeleteArticleUseCase $useCase, CheckPostedUserUseCase $checkPostedUserUseCase)
     {
         //
+        $checkPostedUserUseCase->handle($article);
+        $useCase->handle($article);
+        return redirect()->route('articles.index');
     }
 }
