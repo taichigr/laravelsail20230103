@@ -20,10 +20,6 @@ final class UpdateArticleUsecase
      */
     public function handle(Article $article, string $title, string $body)
     {
-        if($article->user_id !== Auth::id()) {
-            abort(403);
-        }
-
         try {
             $article->title = $title;
             $article->body = $body;
