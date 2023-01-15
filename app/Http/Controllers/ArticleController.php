@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Article\UseCase\EditArticleUsecase;
 use App\Article\UseCase\ShowArticleListUseCase;
 use App\Article\UseCase\StoreArticleUseCase;
+use App\Article\UseCase\UpdateArticleUsecase;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
@@ -37,7 +39,7 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param   App\Http\Requests\ArticleRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(ArticleRequest $request, StoreArticleUsecase $useCase)
@@ -64,21 +66,26 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article, EditArticleUsecase $useCase)
     {
         //
+        $useCase->handle($article);
+        return view('articles.edit', ['article' => $article]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param   App\Http\Requests\ArticleRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, Article $article, UpdateArticleUsecase $useCase)
     {
         //
+
+        $useCase->handle($article, $request->title, $request->body);
+        dd($article);
     }
 
     /**
