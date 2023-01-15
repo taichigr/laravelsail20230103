@@ -19,8 +19,15 @@
 </div>
 <div class="flex items-center justify-between">
     <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+        class="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded-xl focus:outline-none focus:shadow-outline"
         type="submit">
         post!
     </button>
+    <div>
+        <form action="{{ route('articles.destroy', ['article' => $article]) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded-xl hover:bg-red-400">button</button>
+        </form>
+    </div>
 </div>
