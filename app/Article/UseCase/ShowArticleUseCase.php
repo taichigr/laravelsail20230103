@@ -12,7 +12,7 @@ final class ShowArticleUseCase
 {
 
     /**
-     * 記事新規登録
+     * 記事表示
      *
      * @throws ValidationException
      */
