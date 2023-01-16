@@ -43,9 +43,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                        @if(Auth::check())
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        @endif
                         @if(Auth::check())
                             <x-dropdown-link :href="route('articles.create')">
                                 {{ __('posts an article') }}
@@ -67,6 +69,9 @@
                         @else
                             <x-dropdown-link :href="route('login')">
                                 {{ __('Login') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('register')">
+                                {{ __('Register') }}
                             </x-dropdown-link>
                         @endif
                     </x-slot>
@@ -103,9 +108,12 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+                @if(Auth::check())
+                    <x-responsive-nav-link :href="route('profile.edit')">
+                        {{ __('Profile') }}
+                    </x-responsive-nav-link>
+                @endif
+
 
                 <x-responsive-nav-link :href="route('articles.create')">
                     {{ __('posts an article') }}
@@ -126,6 +134,9 @@
                 @else
                     <x-responsive-nav-link :href="route('login')">
                         {{ __('Login') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('register')">
+                        {{ __('Register') }}
                     </x-responsive-nav-link>
                 @endif
             </div>
