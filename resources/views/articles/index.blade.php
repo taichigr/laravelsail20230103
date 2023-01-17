@@ -8,16 +8,17 @@
     <div class="py-12">
         @foreach ($articles as $article)
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 mb-4">
-                {{-- TODO: 編集画面に飛ぶのはおかしい --}}
                     <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                        <div class="flex items-center">
-                            <img class="w-12 h-12 rounded-full mr-4" src="https://source.unsplash.com/random" alt="">
-                            <div>
-                                <p class="text-gray-900 loading-none">{{ $article->user->name ?? '' }}</p>
-                                <p class="text-gray-600">created_at-{{ $article->created_at->format('Y/m/j') ?? '' }}</p>
-                                <p class="text-gray-600">updated_at-{{ $article->updated_at->format('Y/m/j') ?? '' }}</p>
+                        <a href="{{ route('profile.show', ['profile' => $article->user_id]) }}">
+                            <div class="flex items-center">
+                                <img class="w-12 h-12 rounded-full mr-4" src="https://source.unsplash.com/random" alt="">
+                                <div>
+                                    <p class="text-gray-900 loading-none">{{ $article->user->name ?? '' }}</p>
+                                    <p class="text-gray-600">created_at-{{ $article->created_at->format('Y/m/j') ?? '' }}</p>
+                                    <p class="text-gray-600">updated_at-{{ $article->updated_at->format('Y/m/j') ?? '' }}</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                         <div class="text-gray-900 font-bold text-xl mb-2 mt-2">
                             <a href="{{ route('articles.show', ['article' => $article]) }}">
                                 {{ $article->title ?? '' }}
