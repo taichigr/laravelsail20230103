@@ -3,14 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Profile\UseCase\ShowProfileUseCase;
+
 
 class ProfileController extends Controller
 {
+    /**
+     * Display the user's profile form.
+     */
+    public function show(int $profile_id, User $user, ShowProfileUseCase $useCase): View
+    {
+
+        return view('profile.show', [] + $useCase->handle($profile_id, $user));
+    }
+
     /**
      * Display the user's profile form.
      */
@@ -26,6 +38,7 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        dd($request);
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
