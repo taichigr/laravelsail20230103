@@ -19,7 +19,6 @@ class ProfileController extends Controller
      */
     public function show(int $profile_id, User $user, ShowProfileUseCase $useCase): View
     {
-
         return view('profile.show', [] + $useCase->handle($profile_id, $user));
     }
 

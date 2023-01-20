@@ -23,11 +23,13 @@
         type="submit">
         post!
     </button>
-    <div>
-        <form action="{{ route('articles.destroy', ['article' => $article]) }}" method="post">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded-xl hover:bg-red-400">button</button>
-        </form>
-    </div>
+    @if(!empty($article))
+        <div>
+            <form action="{{ route('articles.destroy', ['article' => $article]) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded-xl hover:bg-red-400">delete</button>
+            </form>
+        </div>
+    @endif
 </div>
