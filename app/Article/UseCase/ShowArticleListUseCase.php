@@ -18,7 +18,7 @@ final class ShowArticleListUseCase
      */
     public function handle(): array
     {
-        $articles = Article::query()->orderBy('id', 'desc')->paginate(5);
+        $articles = Article::query()->latest('id')->paginate(5);
 
         return [
             'articles' => $articles,
