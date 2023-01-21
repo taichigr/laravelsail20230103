@@ -18,7 +18,7 @@ class ShowArticleListUseCaseTest extends TestCase
         $this->useCase = new ShowArticleListUseCase();
     }
 
-    public function testShowArticleListTest()
+    public function test_show_article_list_test()
     {
 
         $response = $this->useCase->handle();
