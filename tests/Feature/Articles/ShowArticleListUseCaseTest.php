@@ -3,6 +3,7 @@
 namespace Tests\Feature\Article;
 
 use App\Article\UseCase\ShowArticleListUseCase;
+use App\Models\Article;
 use Tests\TestCase;
 
 class ShowArticleListUseCaseTest extends TestCase
@@ -24,5 +25,7 @@ class ShowArticleListUseCaseTest extends TestCase
         $response = $this->useCase->handle();
 
         self::assertCount(5, $response['articles']);
+        self::assertInstanceOf(Article::class, $response['articles'][0]);
+
     }
 }
