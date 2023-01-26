@@ -1,39 +1,39 @@
-name: PHPUnit GitHub Actions Test
+name: CI
 
 on:
   pull_request:
-    branches:
-      - main
-
-defaults:
-  run:
-    working-directory: ./
+    branches: [ "main" ]
 
 jobs:
-  run-test:
+  laravel-tests:
+
     runs-on: ubuntu-latest
-
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:7.4
-
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: secret
-          MYSQL_DATABASE: laravel-bookmark
-        ports:
-          - 33306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    # laravelプロジェクトのあるディレクトリに変更
+    defaults:
+      run:
+        working-directory: ./
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: cp env
+        run: cp .env.example .env
 
-      - name: Migrate And Setup
-        run: cp .env.ci .env && php artisan key:generate && php artisan migrate && php artisan db:seed --class=DatabaseSeeder && chmod -R 777 storage
+      - name: composer install
+        run: docker run --rm -u "$(id -u):$(id -g)" -v $(pwd):/var/www/html -w /var/www/html laravelsail/php81-composer:latest composer install --ignore-platform-reqs
 
-      - name: Run test suite
-        run: composer run-script test
+      # 先に起動しておく
+      - name: start　mysql
+        run: ./vendor/bin/sail up -d mysql
+
+      - name: start
+        run: ./vendor/bin/sail up -d
+
+      - name: generate key
+        run: ./vendor/bin/sail artisan key:generate
+
+      - name: migrate
+        run: ./vendor/bin/sail artisan migrate
+
+      - name: test
+        run: ./vendor/bin/sail test
