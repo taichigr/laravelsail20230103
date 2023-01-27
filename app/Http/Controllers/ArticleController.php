@@ -64,25 +64,19 @@ class ArticleController extends Controller
         return view('articles.show', [] + $useCase->handle($article));
     }
 
-    public function like(Request $request, Article $article)
+    public function like(Request $request, Article $article, ShowArticleListUseCase $useCase)
     {
-        $article->likes->detach($request->user()->id);
-        $article->likes->attach($request->user()->id);
+        $article->likes()->detach($request->user()->id);
+        $article->likes()->attach($request->user()->id);
 
-        return [
-            'id' => $article->id,
-            'countLikes' => $article->count_likes,
-        ];
+        return redirect()->route('articles.index');
     }
 
-    public function unlike(Request $request, Article $article)
+    public function unlike(Request $request, Article $article, ShowArticleListUseCase $useCase)
     {
-        $article->likes->detach($request->user()->id);
+        $article->likes()->detach($request->user()->id);
 
-        return [
-            'id' => $article->id,
-            'countLikes' => $article->count_likes,
-        ];
+        return redirect()->route('articles.index');
     }
 
     /**
