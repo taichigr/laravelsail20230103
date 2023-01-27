@@ -60,5 +60,6 @@ class Article extends Model
     {
         return $this->likes->count();
     }
+
     
 }
