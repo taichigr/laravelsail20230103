@@ -11,7 +11,7 @@ jobs:
     # laravelプロジェクトのあるディレクトリに変更
     defaults:
       run:
-        working-directory: ./example-app
+        working-directory: ./
 
     steps:
       - uses: actions/checkout@v3
@@ -33,7 +33,7 @@ jobs:
         run: ./vendor/bin/sail artisan key:generate
 
       - name: migrate
-        run: ./vendor/bin/sail artisan migrate
-
+        run: ./vendor/bin/sail artisan migrate:refresh --seed
+        
       - name: test
         run: ./vendor/bin/sail test
