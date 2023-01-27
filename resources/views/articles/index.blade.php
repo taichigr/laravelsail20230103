@@ -29,7 +29,25 @@
                             <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
                             <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
                         </div>
-                        <p class="text-gray-700 text-base break-words">{!! nl2br(format_article_body($article->body)) ?? '' !!}</p>
+                        <p class="text-gray-700 text-base break-words mb-4">{!! nl2br(format_article_body($article->body)) ?? '' !!}</p>
+                        <form method="post" action="{{$article->isLikedBy(Auth::user()) ? route('articles.like', ['article' => $article]): route('articles.unlike', ['article' => $article])}}">
+                            @csrf
+                            @if($article->isLikedBy(Auth::user()) == false)
+                                @method('PUT')
+                            @else
+                                @method('DELETE')
+                            @endif
+
+                            <button
+                                type="submit"
+                            >
+                            いいね機能実装中
+                                <i 
+                                    class="fas fa-heart mr-1 @if($article->isLikedBy(Auth::user())) text-red-400 @endif"
+                                ></i>
+                            </button>
+                            {{ $article->count_likes }}
+                        </form>
                     </div>
             </div>
         @endforeach

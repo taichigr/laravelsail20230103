@@ -64,6 +64,21 @@ class ArticleController extends Controller
         return view('articles.show', [] + $useCase->handle($article));
     }
 
+    public function like(Request $request, Article $article, ShowArticleListUseCase $useCase)
+    {
+        $article->likes()->detach($request->user()->id);
+        $article->likes()->attach($request->user()->id);
+
+        return redirect()->route('articles.index');
+    }
+
+    public function unlike(Request $request, Article $article, ShowArticleListUseCase $useCase)
+    {
+        $article->likes()->detach($request->user()->id);
+
+        return redirect()->route('articles.index');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
