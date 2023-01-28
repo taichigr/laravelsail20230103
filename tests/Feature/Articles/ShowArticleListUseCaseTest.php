@@ -4,6 +4,7 @@ namespace Tests\Feature\Article;
 
 use App\Article\UseCase\ShowArticleListUseCase;
 use App\Models\Article;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class ShowArticleListUseCaseTest extends TestCase
@@ -21,7 +22,8 @@ class ShowArticleListUseCaseTest extends TestCase
 
     public function test_show_article_list_test()
     {
-
+        // テスト実行時に一旦シーダー・ファクトリーをやる
+        dd(DB::connection()->getConfig());
         $response = $this->useCase->handle();
 
         self::assertCount(5, $response['articles']);

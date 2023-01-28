@@ -30,11 +30,12 @@ class DeleteArticleUseCaseTest extends TestCase
     public function test_delete_article()
     {
         // ログインが必要なため、強制ログイン
-        $testUser = User::query()->first();
-        Auth::loginUsingId($testUser->id);
+        $user = User::factory()->create();
 
-        $article = Article::query()->where('user_id', $testUser->id)->first();
+        Auth::loginUsingId($user->id);
 
+        $article = Article::factory()->for($user)->create();
+        
         $this->useCase->handle($article);
 
         Auth::logout();

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Articles;
 
 use App\Article\UseCase\StoreArticleUsecase;
+use App\Models\Article;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -30,12 +31,12 @@ class StoreArticleUseCaseTest extends TestCase
      */
     public function test_save_correct_data()
     {
-
         // ログインが必要なため、強制ログイン
-        $testUser = User::query()->first();
-        Auth::loginUsingId($testUser->id);
+        $user = User::factory()->create();
 
-        $title = 'sample title';
+        Auth::loginUsingId($user->id);
+
+        $title = 'store article';
         $body = 'コメントコメントコメント body';
         $this->useCase->handle($title, $body);
 
@@ -44,7 +45,7 @@ class StoreArticleUseCaseTest extends TestCase
         $this->assertDatabaseHas('articles', [
             'title' => $title,
             'body' => $body,
-            'user_id' => $testUser->id,
+            'user_id' => $user->id,
         ]);
 
     }
