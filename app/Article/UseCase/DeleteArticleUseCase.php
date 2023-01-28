@@ -14,8 +14,6 @@ final class DeleteArticleUseCase
      * 記事投稿削除処理
      *
      * @param Article $article
-     * @param string $title
-     * @param string $body
      * @throws ValidationException
      */
     public function handle(Article $article)
