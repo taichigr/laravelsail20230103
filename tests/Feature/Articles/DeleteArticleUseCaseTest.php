@@ -29,6 +29,7 @@ class DeleteArticleUseCaseTest extends TestCase
      */
     public function test_delete_article()
     {
+        
         // ログインが必要なため、強制ログイン
         $user = User::factory()->create();
 
