@@ -35,5 +35,8 @@ jobs:
       - name: migrate
         run: ./vendor/bin/sail artisan migrate:refresh --seed
         
+      - name: migrate test
+        run: ./vendor/bin/sail artisan migrate:refresh --seed --env=testing
+        
       - name: test
         run: ./vendor/bin/sail artisan test
