@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: cp env
-        run: cp .env.example .env
+        run: cp .env.testing .env
 
       - name: composer install
         run: docker run --rm -u "$(id -u):$(id -g)" -v $(pwd):/var/www/html -w /var/www/html laravelsail/php81-composer:latest composer install --ignore-platform-reqs
