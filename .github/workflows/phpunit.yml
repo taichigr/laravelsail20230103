@@ -31,6 +31,12 @@ jobs:
 
       - name: generate key
         run: ./vendor/bin/sail artisan key:generate
+
+      - name: npm install
+        run: sail npm install
+
+      - name: npm run dev
+        run: sail npm run dev
         
       - name: migrate test
         run: ./vendor/bin/sail artisan migrate:refresh --seed --env=testing
