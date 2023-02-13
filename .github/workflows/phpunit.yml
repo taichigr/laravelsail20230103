@@ -9,6 +9,7 @@ jobs:
 
     runs-on: ubuntu-latest
     # laravelプロジェクトのあるディレクトリに変更
+    # おそらくnpm関連でエラーが出ている。
     defaults:
       run:
         working-directory: ./
@@ -33,10 +34,10 @@ jobs:
         run: ./vendor/bin/sail artisan key:generate
 
       - name: npm install
-        run: sail npm install
+        run: ./vendor/bin/sail npm install
 
       - name: npm run dev
-        run: sail npm run dev
+        run: ./vendor/bin/sail npm run dev
         
       - name: migrate test
         run: ./vendor/bin/sail artisan migrate:refresh --seed --env=testing
