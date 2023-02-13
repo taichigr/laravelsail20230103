@@ -31,6 +31,5 @@ final class StoreArticleUsecase
                 'title' => '不具合が発生しました。お手数ですが時間を空けてから再度実行ください。'
             ]);
         }
-        dump(Auth::id());
     }
 }
