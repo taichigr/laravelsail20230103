@@ -36,8 +36,8 @@ jobs:
       - name: npm install
         run: ./vendor/bin/sail npm install
 
-      - name: npm run dev
-        run: ./vendor/bin/sail npm run dev
+      - name: npm run build
+        run: ./vendor/bin/sail npm run build
         
       - name: migrate test
         run: ./vendor/bin/sail artisan migrate:refresh --seed --env=testing
