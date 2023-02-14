@@ -33,6 +33,9 @@ jobs:
       - name: generate key
         run: ./vendor/bin/sail artisan key:generate
 
+      - name: dump autoload
+        run: ./vendor/bin/sail composer dump-autoload
+
       - name: npm install
         run: ./vendor/bin/sail npm install
 
