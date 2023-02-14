@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Article;
+namespace Tests\Feature\Articles;
 
 use App\Article\UseCase\ShowArticleListUseCase;
 use App\Models\Article;

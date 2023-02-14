@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Articles;
 
-use App\Article\UseCase\StoreArticleUsecase;
+use App\Article\UseCase\StoreArticleUseCase;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,7 +14,7 @@ use Tests\TestCase;
 class StoreArticleUseCaseTest extends TestCase
 {
 
-    private StoreArticleUsecase $useCase;
+    private StoreArticleUseCase $useCase;
 
     /**
      * setUpメソッドは、各テストケースが実行される前に必ず実行される
@@ -22,7 +22,7 @@ class StoreArticleUseCaseTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->useCase = new StoreArticleUsecase();
+        $this->useCase = new StoreArticleUseCase();
     }
     /**
      * A basic feature test example.
