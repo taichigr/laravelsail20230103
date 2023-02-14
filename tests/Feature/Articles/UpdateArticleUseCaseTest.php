@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Articles;
 
-use App\Article\UseCase\UpdateArticleUsecase;
+use App\Article\UseCase\UpdateArticleUseCase;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
@@ -15,7 +15,7 @@ use Tests\TestCase;
 class UpdateArticleUseCaseTest extends TestCase
 {
 
-    private UpdateArticleUsecase $useCase;
+    private UpdateArticleUseCase $useCase;
 
     /**
      * setUpメソッドは、各テストケースが実行される前に必ず実行される
@@ -23,7 +23,7 @@ class UpdateArticleUseCaseTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->useCase = new UpdateArticleUsecase();
+        $this->useCase = new UpdateArticleUseCase();
     }
     /**
      * A basic feature test example.
