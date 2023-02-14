@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
-final class UpdateArticleUsecase
+final class UpdateArticleUseCase
 {
 
     /**
